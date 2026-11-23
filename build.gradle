@@ -25,6 +25,9 @@ dependencies {
 
     implementation platform("org.springframework.ai:spring-ai-bom:2.0.0-M4") //bom = build of material
     implementation'org.springframework.ai:spring-ai-starter-model-google-genai' //google ai studio que e de graca
+
+    implementation'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:3.2.0'
 }
 
 tasks.named('test') {
