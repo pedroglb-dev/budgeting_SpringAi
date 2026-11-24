@@ -29,6 +29,8 @@ dependencies {
 
     implementation'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:3.2.0'
+
+    implementation 'org.springframework.ai:spring-ai-starter-model-google-genai-tts'
 }
 
 tasks.named('test') {

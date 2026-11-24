@@ -1,0 +1,41 @@
+package com.budgeting;
+
+import org.springframework.ai.audio.tts.TextToSpeechModel;
+import org.springframework.core.io.ByteArrayResource;
+import org.springframework.core.io.Resource;
+import org.springframework.http.ContentDisposition;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.nio.charset.StandardCharsets;
+
+@RestController
+@RequestMapping("/api")
+public class TextToSpeechController {
+    private TextToSpeechModel textToSpeechModel;
+
+    public TextToSpeechController(TextToSpeechModel textToSpeechModel) {
+        this.textToSpeechModel = textToSpeechModel;
+    }
+
+    @PostMapping(value = "/synthesize", produces = "audio/wav")
+    public ResponseEntity<Resource>  synthesize(@RequestBody(required = true) SynthesizeRequest request) {
+        var audio = textToSpeechModel.call(request.text());
+        var resource = new ByteArrayResource(audio);
+
+        return ResponseEntity.ok()
+                .header(HttpHeaders.CONTENT_DISPOSITION,
+                        ContentDisposition.attachment()
+                                .filename("audio.wav")
+                                .build()
+                                .toString())
+                .body(resource);
+    }
+
+    record SynthesizeRequest(String text) {
+
+    }
+
+}
