@@ -1,5 +1,6 @@
 package com.budgeting;
 
+import org.springframework.ai.audio.transcription.TranscriptionModel;
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.ai.google.genai.GoogleGenAiChatModel;
 import org.springframework.boot.SpringApplication;
